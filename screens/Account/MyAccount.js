@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 
 import { Header, IconButton, TextButton, InfoItem } from "../../components";
 import { COLORS, SIZES, icons } from "../../constants";
@@ -8,7 +8,7 @@ const MyAccount = ({ navigation }) => {
   function renderHeader() {
     return (
       <Header
-        title="MY ACCOUNT"
+        title="MY Profile"
         containerStyle={{
           height: 50,
           marginHorizontal: SIZES.padding,
@@ -34,19 +34,45 @@ const MyAccount = ({ navigation }) => {
             onPress={() => navigation.goBack()}
           />
         }
-        rightComponent={
-          <TextButton
-            label="Edit"
-            labelStyle={{
-              color: COLORS.primary,
-            }}
-            buttonContainerStyle={{
-              backgroundColor: null,
-            }}
-            onPress={() => navigation.navigate("MyAccountEdit")}
-          />
-        }
       />
+    );
+  }
+  function renderFooter() {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          height: 120,
+          alignItems: "center",
+          paddingHorizontal: SIZES.padding,
+          paddingBottom: SIZES.radius,
+        }}
+      >
+        <TextButton
+          buttonContainerStyle={{
+            flex: 1,
+            flexDirection: "row",
+            height: 60,
+            marginLeft: SIZES.radius,
+            paddingHorizontal: SIZES.radius,
+            borderRadius: SIZES.radius,
+            backgroundColor: COLORS.primary,
+          }}
+          label="Update"
+          onPress={() => navigation.navigate("MyAccountEdit")}
+        />
+      </View>
+    );
+  }
+
+  function renderProfile() {
+    return (
+      <View style={{ alignContent: "center", alignItems: "center" }}>
+        <Image
+          source={icons.pic}
+          style={{ width: 120, height: 120, borderRadius: 100 }}
+        />
+      </View>
     );
   }
 
@@ -64,33 +90,8 @@ const MyAccount = ({ navigation }) => {
 
         <InfoItem label="Phone Number" value="111-222-3333" />
 
-        <InfoItem label="User ID" value="1111 2222" withDivider={false} />
-      </View>
-    );
-  }
-
-  function renderSectionTwo() {
-    return (
-      <View
-        style={{
-          marginTop: SIZES.padding,
-          borderRadius: SIZES.radius,
-          paddingHorizontal: SIZES.radius,
-          backgroundColor: COLORS.lightGray2,
-        }}
-      >
-        <InfoItem label="ID Card" value="Not updated" />
-
-        <InfoItem label="Date of Birth" value="03/03/2000" />
-
-        <InfoItem label="Gender" value="Female" />
-
-        <InfoItem label="Joined" value="October 2022" />
-
-        <InfoItem label="Email" value="maryfontillas@gmail.com" />
-
         <InfoItem
-          label="Address"
+          label="Adress"
           value="Novaliches, Quezon City"
           withDivider={false}
         />
@@ -112,8 +113,10 @@ const MyAccount = ({ navigation }) => {
           paddingHorizontal: SIZES.padding,
         }}
       >
+        {renderProfile()}
+
         {renderSectionOne()}
-        {renderSectionTwo()}
+        {renderFooter()}
       </ScrollView>
     </View>
   );

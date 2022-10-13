@@ -54,7 +54,7 @@ const FooterTotal = ({ subTotal, shippingFee, total, onPress }) => {
             borderRadius: SIZES.radius,
             backgroundColor: COLORS.primary,
           }}
-          label="Complete order"
+          label="Proceed to payment"
           onPress={onPress}
         />
       </View>

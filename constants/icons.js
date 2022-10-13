@@ -6,6 +6,8 @@ const coupon = require("../assets/icons/coupon.png");
 const cross = require("../assets/icons/cross.png");
 const cancel = require("../assets/icons/cancel.png");
 const cart = require("../assets/icons/cart.png");
+const pic = require("../assets/icons/pic.jpg");
+
 const check_off = require("../assets/icons/check_off.png");
 const check_on = require("../assets/icons/check_on.png");
 const check_circle = require("../assets/icons/check_circle.png");
@@ -83,6 +85,7 @@ export default {
   google,
   burger,
   cherry,
+  pic,
   clock,
   correct,
   rice,

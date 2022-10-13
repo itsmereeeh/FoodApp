@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { RadioButton } from "react-native-paper";
 
 import {
   Header,
@@ -13,7 +14,7 @@ import { FONTS, SIZES, COLORS, icons, dummyData } from "../../constants";
 
 const Checkout = ({ navigation, route }) => {
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [couponCode, setCouponCode] = React.useState("");
+  const [checked, setChecked] = React.useState("first");
 
   React.useEffect(() => {
     let { selectedCard } = route.params;
@@ -69,28 +70,25 @@ const Checkout = ({ navigation, route }) => {
       />
     );
   }
-
   function renderMyCards() {
     return (
       <View>
-        {selectedCard &&
-          dummyData.myCards.map((item, index) => {
-            return (
-              <CardItem
-                key={`MyCard-${item.id}`}
-                item={item}
-                isSelected={
-                  `${selectedCard?.key}-${selectedCard?.id}` ==
-                  `MyCard-${item.id}`
-                }
-                onPress={() => selectCardHandler({ ...item, key: "MyCard" })}
-              />
-            );
-          })}
+        {dummyData.myCards.map((item, index) => {
+          return (
+            <CardItem
+              key={`MyCard-${item.id}`}
+              item={item}
+              isSelected={
+                `${selectedCard?.key}-${selectedCard?.id}` ==
+                `MyCard-${item.id}`
+              }
+              onPress={() => setSelectedCard({ ...item, key: "MyCard" })}
+            />
+          );
+        })}
       </View>
     );
   }
-
   function renderDeliveryAddr() {
     return (
       <View
@@ -129,6 +127,34 @@ const Checkout = ({ navigation, route }) => {
           >
             Novaliches, Quezon City{" "}
           </Text>
+        </View>
+        <Text style={{ ...FONTS.h3, marginTop: 30 }}>Delivery Method</Text>
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: SIZES.radius,
+            paddingVertical: SIZES.radius,
+            paddingHorizontal: SIZES.padding,
+            borderWidth: 2,
+            borderRadius: SIZES.radius,
+            borderColor: COLORS.lightGray2,
+          }}
+        >
+          <View>
+            <RadioButton
+              value="Door Delivery"
+              status={checked === "first" ? "checked" : "unchecked"}
+              onPress={() => setChecked("first")}
+            />
+
+            <RadioButton
+              value="second"
+              status={checked === "second" ? "checked" : "unchecked"}
+              onPress={() => setChecked("second")}
+            />
+          </View>
         </View>
       </View>
     );
